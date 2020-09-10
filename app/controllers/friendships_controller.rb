@@ -16,13 +16,22 @@ class FriendshipsController < ApplicationController
   def update
     @friendship = current_user.Friendship.find(id: params[:id])
     if @friendship.update(status: true)
-      flash[:success] = "Friend request accepted"
-      redirect_to @users_path
+      flash[:success] = "You're now friends with #{@user.name}"
+      redirect_to users_path
     else
       flash[:error] = "Something went wrong"
     end
   end
   
+  def destroy
+    @friendshp = current_user.Friendship.find(params[:id])
+    if @friendshp.destroy
+      flash[:success] = 'Friend request rejected.'
+      redirect_to users_path
+    else
+      flash[:error] = 'Something went wrong'
+    end
+  end
   
   
 end
