@@ -1,20 +1,26 @@
 module UsersHelper
-  def friendship_status(obj)
+  def friendship_status(usr)
+    return unless current_user.id != usr.id
+
+    return if current_user.friend?(usr)
+
+
     html = ""
 
-    if current_user.friend_requests.include?(obj)
-      html += link_to "Accept", friendship_path(create_params), method: :put
+    
+    if current_user.pending_friends.include?(usr)
+      html += "Invitation sent"
+    elsif current_user.friend_requests.include?(usr)
+      html += link_to "Accept", invite_path(user_id: usr.id), method: :put
       html += "  "
-      html += link_to "Reject", action: "destroy", id: delete
-    elsif current_user.pending_friends.include?(obj)
-      html += "Pending Request"
-    elsif current_user.friends.include?(obj)
+      html += link_to "Reject", reject_path(user_id: usr.id)
+    elsif current_user.friends.include?(usr)
       html += "Already Friends"
     else
-      html += link_to "Invite", action: "new"
+      html += link_to "Invite", invite_path(user_id: usr.id)
     end
 
-    html.html.safe
+    html.html_safe
   end
 
 end
