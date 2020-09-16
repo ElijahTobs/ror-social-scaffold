@@ -18,12 +18,16 @@
           <%= menu_link_to 'All users', users_path %>
         </div>
       </div>
+      
+      <%= current_user.name + ' online' %>
+
       <% if current_user %>
         <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to 'Sign in', user_session_path %>
       <% end %>
     </nav>
+    
     <% if notice.present? %>
       <div class="notice">
         <p> <%= notice %> </p>
@@ -37,5 +41,6 @@
     <main class="main">
       <%= yield %>
     </main>
+    
   </body>
 </html>
