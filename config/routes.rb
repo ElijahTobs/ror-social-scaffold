@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   get 'accept' => 'friendships#accept_request'
   delete 'reject' => 'friendships#reject_request'
   get 'pending' => 'friendships#pending_request'
-  get 'list' => 'friendships#friends_list'
-  delete 'remove' => 'friendships#remove_friend'
 
   # put '/accept_friend/:sender_id', to: 'friendships#accept', as: :accept_request
 
