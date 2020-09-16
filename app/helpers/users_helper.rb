@@ -11,7 +11,7 @@ module UsersHelper
     if current_user.pending_friends.include?(usr)
       html += "Invitation sent"
     elsif current_user.friend_requests.include?(usr)
-      html += link_to "Accept", friendships_path(user_id: usr.id), method: :put, class: 'accept'
+      html += link_to "Accept", friendships_path(user_id: usr.id), class: 'accept'
       html += "  "
       html += link_to "Reject", friendships_path(user_id: usr.id), method: :delete, class: 'reject'
     elsif current_user.friends.include?(usr)
