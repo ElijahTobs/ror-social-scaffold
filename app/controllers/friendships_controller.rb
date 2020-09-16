@@ -1,12 +1,17 @@
 class FriendshipsController < ApplicationController
-  def new
-    @friendship = Friendship.new
-  end
+  # def new
+  #   @friendship = Friendship.new
+  # end
   
-  def create
-    @friendship_request = current_user.friendships.new(friend_id: params[:user_id], confirmed: false)
+  # accept_params = { id: friend[0], user_id: current_user.id, friend_id: id, status: true }
 
-    if @friendship_request.save
+  def create
+    # @request_sender = User.find(params[:user_id])
+    @friendship = Friendship.new(friendship_params)
+
+    # user_id: current_user.id, friend_id: @request_sender.id, confirmed: false
+
+    if @friendship.save
       flash[:notice] = "Friend request sent"
       redirect_to users_path
     else
@@ -15,8 +20,10 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-    @friendship = current_user.friendships.find(id: params[:id])
-    if @friendship.update(status: true)
+    # @request_sender = User.find(params[:user_id])
+    @user = User.find_by(params[:id])
+
+    if current_user.confirm_friend(@user)
       flash[:success] = "You're now friends with #{@user.name}"
       redirect_to users_path
     else
@@ -34,5 +41,10 @@ class FriendshipsController < ApplicationController
     end
   end
   
+  private
+
+  def friendship_params
+    params.permit(:id, :user_id, :friend_id, :status)
+  end
   
 end
