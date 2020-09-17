@@ -9,8 +9,9 @@ class FriendshipsController < ApplicationController
   end
 
   def accept_request
+    # @user = User.find_by(user_id: user_id)
     if current_user.confirm_friend(params[:user_id])
-      flash[:success] = "You're now friends with #{@user.name}"
+      flash[:success] = "Friend request accepted"
       redirect_to users_path
     else
       flash[:error] = "Something went wrong"
