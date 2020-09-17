@@ -1,40 +1,39 @@
-class FriendshipsController < ApplicationController
-  def send_request
-    if current_user.send_invite(params[:user_id])
-      flash[:notice] = "Friend request sent"
+class FriendRequestsController < ApplicationController
+  def send_invitation
+    if current_user.send_invitation(params[:user_id])
+      flash.notice = 'Friend invitation sent'
       redirect_to users_path
     else
-      flash[:error] = "Unable to send friend request"
+      flash.now[:notice] = 'error occured'
     end
   end
 
-  def accept_request
-    # @user = User.find_by(user_id: user_id)
-    if current_user.confirm_friend(params[:user_id])
-      flash[:success] = "Friend request accepted"
+  def accept_invitation
+    if current_user.confirm_invites(params[:user_id])
+      flash.notice = 'friend accepted'
       redirect_to users_path
     else
-      flash[:error] = "Something went wrong"
-    end
-  end
-  
-  def reject_request
-    if current_user.reject_friend(params[:user_id])
-      flash[:success] = 'Friend request rejected.'
-      redirect_to users_path
-    else
-      flash[:error] = 'Something went wrong'
+      flash.now[:notice] = 'error occured'
     end
   end
 
-  def pending_request
-    @pending_request = current_user.pending_friends
+  def reject_invitation
+    if current_user.reject_invites(params[:user_id])
+      flash.notice = 'friend request declined'
+      redirect_to users_path
+    else
+      flash.now[:notice] = 'error occured'
+    end
   end
-  
-  private
 
-  def friendship_params
-    params.permit(:id, :user_id, :friend_id, :status)
+  def pending_invitation
+    @pending_invitations = current_user.pending_invites
   end
-  
-end
+
+  def destroy
+    f1 = FriendRequest.all.find_by(user_id: params[:user_id], friend_id: current_user.id)
+    f2 = FriendRequest.all.find_by(user_id: current_user.id, friend_id: params[:user_id])
+    f1&.delete
+    f2&.delete
+    redirect_to users_path
+  end
