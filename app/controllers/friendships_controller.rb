@@ -9,7 +9,7 @@ class FriendshipsController < ApplicationController
   end
 
   def accept_request
-    if current_user.confirm_friend(@user, method: :put)
+    if current_user.confirm_friend(params[:user_id])
       flash[:success] = "You're now friends with #{@user.name}"
       redirect_to users_path
     else
@@ -17,14 +17,17 @@ class FriendshipsController < ApplicationController
     end
   end
   
-  def destroy
-    @friendshp = current_user.friendships.find(params[:id])
-    if @friendshp.destroy
+  def reject_request
+    if current_user.reject_friend(params[:user_id])
       flash[:success] = 'Friend request rejected.'
       redirect_to users_path
     else
       flash[:error] = 'Something went wrong'
     end
+  end
+
+  def pending_request
+    @pending_request = current_user.pending_friends
   end
   
   private
