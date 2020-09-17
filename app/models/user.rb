@@ -21,13 +21,20 @@ class User < ApplicationRecord
 
    # Users who have yet to confirme friend requests
   def pending_friends
-    friendships.map{|friendship| friendship.friend unless friendship.confirmed || friendship.nil?}.compact
+    friendships.map{|friendship| friendship.friend unless friendship.confirmed}.compact
   end
 
   # Users who have requested to be friends
   def friend_requests
-    inverse_friendships.map{|friendship| friendship.user unless friendship.confirmed || friendship.nil?}.compact
+    inverse_friendships.map{|friendship| friendship.user unless friendship.confirmed}.compact
   end
+
+  def send_invite(user_id)
+    @friendship = Friendship.new(user_id: id, friend_id: user_id)
+    @friendship.confirmed = false
+    @friendship.save
+  end
+  
 
   def confirm_friend(user)
     friendship = inverse_friendships.find{|friendship| friendship.user == user}

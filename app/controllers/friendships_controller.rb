@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
   def send_request
-    if current_user.send_request(params[:user_id])
+    if current_user.send_invite(params[:user_id])
       flash[:notice] = "Friend request sent"
       redirect_to users_path
     else
@@ -8,9 +8,7 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  def update
-    @user = User.find(friend_id: params[:user_id])
-
+  def accept_request
     if current_user.confirm_friend(@user, method: :put)
       flash[:success] = "You're now friends with #{@user.name}"
       redirect_to users_path
