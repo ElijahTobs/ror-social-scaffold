@@ -22,7 +22,7 @@ class FriendRequestsController < ApplicationController
       flash.notice = 'friend request declined'
       redirect_to users_path
     else
-      flash.now[:notice] = 'error occured'
+      flash.now[:notice] = 'error occurd'
     end
   end
 
