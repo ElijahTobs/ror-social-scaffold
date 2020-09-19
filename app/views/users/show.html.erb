@@ -1,11 +1,19 @@
 <section class="user-section">
-  <h2>
-    <%= "Name: #{@user.name}" %>
-  </h2>
-  <span>
-    <%= friendship_status(@user) %>
-  </span>
-
+  <h2><%= "Name: #{@user.name}" %></h2>
+  <ul>
+    <li>
+      <% if current_user.friend_invites(@user) %>
+        <button class="btn btn-warning"> Pending Invitation </button>
+      <% elsif current_user.receive_invitation(@user) %>
+        <%= link_to 'Accept', accept_invite_path(user_id: @user.id), class:"btn btn-primary" %>
+        <%= link_to 'Decline', reject_invite_path(user_id: @user.id), method: :delete, class:"btn btn-danger" %>
+      <% elsif !current_user.friend?(@user) && current_user.id != @user.id %>
+        <%= link_to 'Add Friend', send_invite_path(user_id: @user.id) , class:"btn btn-success" %>
+      <% elsif current_user.friend?(@user) %>
+        <%= link_to 'Remove friend', remove_friend_path(user_id: @user.id), method: :delete, data: {confirm: "Are you sure you want to remove friend?"}, class: "btn btn-danger" %>
+      <% end %>
+    </li>
+  </ul>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
