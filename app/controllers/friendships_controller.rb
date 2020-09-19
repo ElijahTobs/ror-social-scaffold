@@ -1,4 +1,4 @@
-class FriendRequestsController < ApplicationController
+class FriendshipsController < ApplicationController
   def send_invitation
     if current_user.send_invitation(params[:user_id])
       flash.notice = 'Friend invitation sent'
@@ -10,7 +10,7 @@ class FriendRequestsController < ApplicationController
 
   def accept_invitation
     if current_user.confirm_invites(params[:user_id])
-      flash.notice = 'friend accepted'
+      flash.notice = 'Friend request accepted'
       redirect_to users_path
     else
       flash.now[:notice] = 'error occured'
@@ -19,7 +19,7 @@ class FriendRequestsController < ApplicationController
 
   def reject_invitation
     if current_user.reject_invites(params[:user_id])
-      flash.notice = 'friend request declined'
+      flash.notice = 'Friend request declined'
       redirect_to users_path
     else
       flash.now[:notice] = 'error occurd'
@@ -31,9 +31,10 @@ class FriendRequestsController < ApplicationController
   end
 
   def destroy
-    f1 = FriendRequest.all.find_by(user_id: params[:user_id], friend_id: current_user.id)
-    f2 = FriendRequest.all.find_by(user_id: current_user.id, friend_id: params[:user_id])
+    f1 = Friendship.all.find_by(user_id: params[:user_id], friend_id: current_user.id)
+    f2 = Friendship.all.find_by(user_id: current_user.id, friend_id: params[:user_id])
     f1&.delete
     f2&.delete
     redirect_to users_path
   end
+end

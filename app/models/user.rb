@@ -38,7 +38,7 @@ class User < ApplicationRecord
   end
 
   def send_invitation(user_id)
-    @friendship = FriendRequest.new(user_id: id, friend_id: user_id)
+    @friendship = Friendship.new(user_id: id, friend_id: user_id)
     @friendship.confirmed = false
     @friendship.save
   end

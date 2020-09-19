@@ -2,10 +2,11 @@ Rails.application.routes.draw do
 
   root 'posts#index'
 
-  get 'invite' => 'friendships#send_request'
-  get 'accept' => 'friendships#accept_request'
-  delete 'reject' => 'friendships#reject_request'
-  get 'pending' => 'friendships#pending_request'
+  
+  get 'invite' => 'friendships#send_invitation'
+  get 'accept' => 'friendships#accept_invitation'
+  delete 'reject' => 'friendships#reject_invitation'
+  get 'pending' => 'friendships#pending_invitation'
 
   # put '/accept_friend/:sender_id', to: 'friendships#accept', as: :accept_request
 
