@@ -19,9 +19,10 @@
         </div>
       </div>
       
-      <%# <%= current_user.name + ' online' %>
+      
 
       <% if current_user %>
+        <%= 'Current User: ' + current_user.name %>
         <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to 'Sign in', user_session_path %>
