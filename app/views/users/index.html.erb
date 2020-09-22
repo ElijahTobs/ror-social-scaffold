@@ -7,16 +7,7 @@
         Name: <%= user.name %>
         <span class="profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-          <% if current_user.friend_invites(user) %>
-            <button class="btn btn-warning"> Invitation sent </button>
-          <% elsif current_user.receive_invitation(user)%>
-            <%= link_to 'Accept', accept_path(user_id: user.id), class:"btn btn-primary" %>
-            <%= link_to 'Decline', reject_path(user_id: user.id), method: :delete, class:"btn btn-danger" %>
-          <% elsif !current_user.friend?(user) && current_user.id != user.id %>
-            <%= link_to 'Add Friend', invite_path(user_id: user.id) , class:"btn btn-success" %>
-          <% elsif current_user.friend?(user)  %>
-            <button class="btn btn-warning"> A friend </button>
-          <% end %>
+          <%= friendship_options(user) %>
         </span>
       </li>
     <% end %>
