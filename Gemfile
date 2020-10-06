@@ -12,15 +12,17 @@ gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
+
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 5.0.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'database_cleaner', '~> 1.8', '>= 1.8.5'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -34,25 +36,26 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '~> 1.4', '>= 1.4.6'
 gem 'devise'
 gem 'rails-controller-testing'
+gem 'rubocop', '~>0.81.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  # gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
-  gem 'database_cleaner', '~> 1.8', '>= 1.8.5'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rspec-rails'
 end
 
 group :test do
+  # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'launchy'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers'
+  # Easy installation and use of web drivers to run system tests with browsers
+  gem 'launchy'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 4.3'
   gem 'webdrivers'
 end
 
@@ -61,7 +64,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'rubocop'
+
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
