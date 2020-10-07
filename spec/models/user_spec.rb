@@ -6,23 +6,16 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email).case_insensitive }
 
-    # let(:wrong) { 'test@test' }
-    # it { should_not allow_value(:wrong).for(:email) }
-
-    # it { should allow_value('test@test.com').for(:email) }
-
     context 'when email has wrong format' do
       let(:wrong_email1) { 'jan@foo' }
 
       it 'complains for invalid format' do
-        # is_expected.to eq false
         should_not allow_value(:wrong_email1).for(:email)
       end
 
       let(:wrong_email2) { 'jan' }
 
       it 'complains for invalid format' do
-        # is_expected.to eq false
         should_not allow_value(':wrong_email2').for(:email)
       end
     end
@@ -30,7 +23,6 @@ RSpec.describe User, type: :model do
     context 'when email has correct format' do
       it 'accepts valid format' do
         is_expected.to allow_value('good@mail.com').for(:email)
-        # should allow_value(:correct_email).for(:email)
       end
     end
   end
