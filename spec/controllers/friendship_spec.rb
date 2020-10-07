@@ -8,13 +8,13 @@ RSpec.describe FriendshipsController, type: :controller do
   end
 
   describe 'friendship features ' do
-    it 'creates a friend request' do
+    it 'send friend request' do
       post :send_invitation, params: { user_id: @friend.id }
       expect(response).to redirect_to(users_path)
       expect(response).to have_http_status(302)
     end
 
-    it 'accepts a friend request' do
+    it 'accepts friend request' do
       post :send_invitation, params: { user_id: @friend.id }
       sign_out @user
       sign_in @friend
@@ -23,7 +23,7 @@ RSpec.describe FriendshipsController, type: :controller do
       expect(response).to have_http_status(302)
     end
 
-    it 'rejects a friend request' do
+    it 'rejects friend request' do
       post :send_invitation, params: { user_id: @friend.id }
       sign_out @user
       sign_in @friend
