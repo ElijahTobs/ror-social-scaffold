@@ -12,6 +12,8 @@ module UsersHelper
       html << link_to('Add Friend', invite_path(user_id: user.id), class: 'btn btn-success')
     elsif current_user.friend?(user)
       html << link_to('A friend', class: 'btn btn-warning')
+      html << " "
+      html << link_to('Remove friend', remove_friend_path(user_id: user.id), class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure you want to remove friend?'})
     end
 
     # users.each do |user|
