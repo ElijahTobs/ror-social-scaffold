@@ -68,5 +68,24 @@ RSpec.describe User, type: :model do
       @friend.send_invitation(@user1.id)
       expect(@user1.pending_friends).to include(@friend)
     end
+
+    it 'checks for confirming invitaion' do
+      @friend.send_invitation(@user2.id)
+      expect(@friend.confirm_invites(@user2.id)).to be(true)
+      expect(@friend_request2.confirmed).to eql(true)
+    end
+
+    it 'checks for rejecting invitaion' do
+      @user1.send_invitation(@friend.id)
+      @friend.reject_invites(@user1.id)
+      expect(@user1.friends).not_to include(@friend)
+    end
+
+    it 'confirms if a user is a friend' do
+      @user1.send_invitation(@friend.id)
+      @user2.send_invitation(@friend.id)
+      expect(@user1.friend?(@friend)).to be(false)
+      expect(@user2.friend?(@friend)).to be(true)
+    end
   end
 end
