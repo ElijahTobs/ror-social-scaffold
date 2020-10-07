@@ -37,4 +37,8 @@ class FriendshipsController < ApplicationController
     f2&.delete
     redirect_to users_path
   end
+
+  def friends_list
+    @friends_list = current_user.friends
+  end
 end
