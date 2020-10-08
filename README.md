@@ -4,13 +4,13 @@
 
 ## Built With
 
-- Ruby v2.7.0
+- Ruby v2.7.1
 - Ruby on Rails v5.2.4
+
 
 ## Live Demo
 
-TBA
-
+[Live Demo Link](https://rorsocialmedia.herokuapp.com)
 
 ## Getting Started
 
@@ -37,8 +37,6 @@ Setup database with:
    rails db:migrate
 ```
 
-
-
 ### Usage
 
 Start server with:
@@ -57,13 +55,13 @@ Open `http://localhost:3000/` in your browser.
 
 > Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
 
-### Deployment
+## Author
 
-TBA
+👤 **Elijah Ayandokun**
 
-## Authors
-
-TBA
+- Github: [@ElijahTobs](https://github.com/ElijahTobs)
+- Twitter: [@Elijahgr8](https://twitter.com/Elijahgr8)
+- Linkedin: [linkedin](https://linkedin.com/in/ayandokunelijah)
 
 ## 🤝 Contributing
 
