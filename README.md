@@ -1,6 +1,9 @@
 # Scaffold for social media app with Ruby on Rails
 
-> This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
+> This is a microverse Ruby on Rails project that simulates a simple social media app, with the use of associations and devise. Within the app, a user can sign up, login, send a friend request, accept friend request, post content, like content, comment on content and also unfriend a friend.
+
+## Screenshot
+![screenshot](app/assets/images/scaffold.png)
 
 ## Built With
 
